@@ -50,6 +50,11 @@ function Navbar() {
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
+                      <Link className="dropdown-item" to="/edit-profile">
+                        Editar Perfil
+                      </Link>
+                    </li>
+                    <li>
                       <a className="dropdown-item" href="#" onClick={handleLogout}>
                         Cerrar Sesión
                       </a>

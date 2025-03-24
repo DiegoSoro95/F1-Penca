@@ -27,6 +27,18 @@ const login = async (email, password) => {
   return response.data;
 };
 
+const updatePassword = async (currentPassword, newPassword) => {
+  const response = await axios.post(`${API_URL}/updatePassword`, 
+    { 
+      currentPassword, 
+      newPassword 
+    },{ 
+      headers: authService.authHeader() 
+    });
+  
+  return response.data;
+};
+
 // Cerrar sesión
 const logout = () => {
   localStorage.removeItem('user');
@@ -53,7 +65,8 @@ const authService = {
   login,
   logout,
   getCurrentUser,
-  authHeader
+  authHeader,
+  updatePassword
 };
 
 export default authService;

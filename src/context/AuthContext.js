@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import authService from '../services/authService';
 
@@ -21,6 +20,22 @@ export function AuthProvider({ children }) {
       setIsAuthenticated(true);
     }
     setLoading(false);
+
+    // Añadir listener para sincronizar logout entre pestañas
+    const handleStorageChange = (event) => {
+      if (event.key === 'logout') {
+        // Realizar logout local cuando se detecta el evento
+        setCurrentUser(null);
+        setIsAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Limpiar listener al desmontar
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const login = async (email, password) => {
@@ -47,8 +62,24 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updatePassword = async (currentPassword, newPassword) => {
+    try {
+      const response = await authService.updatePassword(currentPassword, newPassword);
+      return response.data;
+    } catch (error) {
+      console.error('Error al actualizar contraseña:', error.response?.data || error.message);
+      throw error;
+    }
+  };
+
   const logout = () => {
+    // Eliminar usuario del localStorage
     localStorage.removeItem('user');
+    
+    // Disparar evento de logout para otras pestañas
+    localStorage.setItem('logout', Date.now().toString());
+    
+    // Actualizar estado local
     setCurrentUser(null);
     setIsAuthenticated(false);
   };
@@ -58,7 +89,8 @@ export function AuthProvider({ children }) {
     isAuthenticated,
     login,
     register,
-    logout
+    logout,
+    updatePassword
   };
 
   return (
