@@ -38,6 +38,12 @@ function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link" to="/leaderboard">Tabla de Posiciones</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/leaderboard">Grupos</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/leaderboard">Bingo</Link>
+                </li>
                 <li className="nav-item dropdown">
                   <a 
                     className="nav-link dropdown-toggle" 

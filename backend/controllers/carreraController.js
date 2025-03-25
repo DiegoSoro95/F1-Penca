@@ -7,8 +7,8 @@ exports.getUpcomingRaces = async (req, res) => {
       `SELECT r.*, 
         (SELECT COUNT(*) FROM bets WHERE race_id = r.id AND user_id = ?) as user_bet_count
       FROM races r 
-      WHERE r.date >= CURDATE() 
-      ORDER BY r.date ASC`,
+      -- WHERE r.first_practice >= CURDATE() 
+      ORDER BY r.first_practice ASC`,
       [req.user.id]
     );
     
