@@ -19,15 +19,9 @@ const getRaceById = async (raceId) => {
   return response.data;
 };
 
-const fetchRaceById = async (raceId) => {
-  const response = await axios.get(`${API_URL}/${raceId}`, { 
-    headers: authService.authHeader() 
-  });
-  return response.data;
-};
 
 const fetchRaceResults = async (raceId) => {
-  const response = await axios.get(`${API_URL}/${raceId}`, { 
+  const response = await axios.get(`${API_URL}/results/${raceId}`, { 
     headers: authService.authHeader() 
   });
   return response.data;
@@ -44,7 +38,6 @@ const fetchUserBetForRace = async (raceId) => {
 const raceService = {
   getUpcomingRaces,
   getRaceById,
-  fetchRaceById,
   fetchRaceResults,
   fetchUserBetForRace
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { useInactivityLogout } from './hooks/useInactivityLogout'; // Nuevo hook
+import { useBackgroundRaceCheck } from './hooks/useBackgroundRaceCheck';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -27,6 +28,15 @@ const InactivityHandler = () => {
   return null;
 };
 
+const UseBackgroundHandler = () => {
+  const { isAuthenticated } = useAuth();
+  
+  // Solo aplicar hook si está autenticado
+  useBackgroundRaceCheck(isAuthenticated);
+  
+  return null;
+};
+
 // Componente ProtectedRoute para rutas que requieren autenticación
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -34,12 +44,13 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+
   return (
     <AuthProvider>
       <Router>
         <div className="d-flex flex-column min-vh-100">
-          {/* Añadir InactivityHandler */}
           <InactivityHandler />
+          <UseBackgroundHandler />
           
           <Navbar />
           <main className="flex-grow-1">

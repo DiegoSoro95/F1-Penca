@@ -79,9 +79,10 @@ exports.createBet = async (req, res) => {
 exports.getUserBets = async (req, res) => {
   try {
     const [bets] = await pool.query(
-      `SELECT b.*, d.name AS driver_name, d.team AS driver_team, r.name AS race_name, r.date AS race_date 
+      `SELECT b.*, d.name AS driver_name, t.name AS driver_team, r.name AS race_name, r.date AS race_date 
       FROM bets b
       JOIN drivers d ON b.driver_id = d.id
+      JOIN teams t ON d.team_id = t.id
       JOIN races r ON b.race_id = r.id
       WHERE b.user_id = ?
       ORDER BY r.date DESC`,

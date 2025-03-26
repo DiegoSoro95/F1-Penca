@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
     const token = jwt.sign(
       { id: result.insertId, username, email },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '2h' }
     );
     
     res.status(201).json({
@@ -91,7 +91,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       { id: user.id, username: user.username, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '2h' }
     );
     
     res.status(200).json({
@@ -197,7 +197,7 @@ exports.updateProfile = async (req, res) => {
     const token = jwt.sign(
       { id: userId, username: user.username, email: email },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '2h' }
     );
 
     res.status(200).json({
@@ -266,7 +266,7 @@ exports.updatePassword = async (req, res) => {
     const token = jwt.sign(
       { id: userId, username: user.username, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '2h' }
     );
 
     res.status(200).json({

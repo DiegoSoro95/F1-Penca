@@ -165,15 +165,20 @@ function Dashboard() {
                                   <span className="badge bg-success">Ya apostaste</span>
                                 ) : (
                                   <Link 
-                                    to={`/bet/${race.id}`} 
+                                    to={`/race/${race.id}`} 
                                     className="btn btn-danger w-100"
                                   >
-                                    Apostar
+                                    Ver Circuito
                                   </Link>
                                 )}
                               </>
                             ) : (
-                              <span className="badge bg-secondary">Cerrado</span>
+                              <Link 
+                                  to={`/race/${race.id}`} 
+                                  className="btn btn-danger w-100"
+                                >
+                                  Ver Circuito
+                                </Link>
                             )}
                           </div>
                         </div>
