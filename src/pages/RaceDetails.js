@@ -183,37 +183,53 @@ function RaceDetails() {
             {/* Race Results (if past race) */}
             {isPastRace && results.length > 0 && (
               <div className="race-results-card mt-4">
-                <h2 className="mb-4 text-gradient">Resultados de la Carrera</h2>
-                <div className="table-responsive">
-                  <table className="table table-dark table-striped">
-                    <thead>
-                      <tr>
-                        <th>Posición</th>
-                        <th>Piloto</th>
-                        <th>Equipo</th>
-                        <th>Tiempo</th>
-                        <th>Puntos</th>
+              <h2 className="mb-4 text-gradient">Resultados de la Carrera</h2>
+              <div className="table-responsive">
+                <table className="table table-dark table-striped">
+                  <thead>
+                    <tr>
+                      <th>Posición</th>
+                      <th>Piloto</th>
+                      <th>Equipo</th>
+                      <th>Tiempo</th>
+                      <th>Puntos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {results.map((result) => (
+                      <tr key={result.id} 
+                          className={result.driver_id === (userBet?.driver_id) ? 'table-primary' : ''}>
+                        <td>{result.position}</td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            {result.image && (
+                              <img 
+                                src={result.image} 
+                                alt={result.driver_name} 
+                                className="driver-image me-3" 
+                                style={{
+                                  width: '50px', 
+                                  height: '50px', 
+                                  objectFit: 'cover', 
+                                  borderRadius: '50%'
+                                }}
+                              />
+                            )}
+                            <div>
+                              {result.driver_name}
+                              {result.driver_id === (userBet?.driver_id) && <span className="badge bg-info ms-2">Tu apuesta</span>}
+                            </div>
+                          </div>
+                        </td>
+                        <td>{result.team}</td>
+                        <td>{result.time || 'N/A'}</td>
+                        <td>{result.points}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {results.map((result) => (
-                        <tr key={result.id} 
-                            className={result.driver_id === (userBet?.driver_id) ? 'table-primary' : ''}>
-                          <td>{result.position}</td>
-                          <td>
-                            {result.driver_name}
-                            {result.position === 1 && <span className="badge bg-warning text-dark ms-2">Ganador</span>}
-                            {result.driver_id === (userBet?.driver_id) && <span className="badge bg-info ms-2">Tu apuesta</span>}
-                          </td>
-                          <td>{result.team}</td>
-                          <td>{result.time || 'N/A'}</td>
-                          <td>{result.points}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+            </div>
             )}
           </div>
 
