@@ -117,7 +117,7 @@ function RaceDetails() {
   const raceDate = new Date(race.date);
   const isPastRace = raceDate < new Date();
   const isUpcoming = !isPastRace;
-
+  
   return (
     <div className="f1-home-container">
       {/* Racing Stripes */}
@@ -181,7 +181,7 @@ function RaceDetails() {
             </div>
 
             {/* Race Results (if past race) */}
-            {isPastRace && results.length > 0 && (
+            {isPastRace && results.races.length > 0 && (
               <div className="race-results-card mt-4">
               <h2 className="mb-4 text-gradient">Resultados de la Carrera</h2>
               <div className="table-responsive">
@@ -196,7 +196,7 @@ function RaceDetails() {
                     </tr>
                   </thead>
                   <tbody>
-                    {results.map((result) => (
+                    {results.races.map((result) => (
                       <tr key={result.id} 
                           className={result.driver_id === (userBet?.driver_id) ? 'table-primary' : ''}>
                         <td>{result.position}</td>
