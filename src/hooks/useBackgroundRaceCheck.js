@@ -24,10 +24,7 @@ export function useBackgroundRaceCheck(isAuthenticated = true) {
             throw new Error(\`HTTP error! status: \${response.status}\`);
           }
           
-          const data = await response.json();
-          console.log('Background race check result:', data);
         } catch (error) {
-          console.error('Background race check error:', error);
         }
       }
 
