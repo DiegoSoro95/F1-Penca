@@ -163,7 +163,7 @@ function Home() {
             <div className={`col-lg-6 mt-5 mt-lg-0 hero-image ${animate ? 'slide-in-right' : ''}`}>
               <div className="position-relative">
                 <img 
-                  src="/imagenes/f1-hero.jpg" 
+                  src={`${process.env.PUBLIC_URL}/imagenes/f1-hero.jpg`}
                   alt="Fórmula 1" 
                   className="img-fluid rounded shadow-lg" 
                   style={{ 

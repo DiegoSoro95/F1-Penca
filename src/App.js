@@ -47,7 +47,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/F1-Penca">
         <div className="d-flex flex-column min-vh-100">
           <InactivityHandler />
           <UseBackgroundHandler />

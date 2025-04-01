@@ -2,7 +2,17 @@ import express, { json } from 'express';
 import cors from 'cors';
 import { initializeDatabase } from './config/db.js';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import https from 'https';
+import http from 'http';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 dotenv.config();
+
+// Obtener el directorio actual (es necesario al usar módulos ES)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Importar rutas
 import authRoutes from './routes/authRoutes.js';
@@ -30,9 +40,25 @@ app.get('/', (_req, res) => {
 });
 
 // Puerto
-const PORT = process.env.PORT || 5000;
+const HTTP_PORT = process.env.HTTP_PORT || 80;
+const HTTPS_PORT = process.env.HTTPS_PORT || 443;
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+// Configuración de certificados SSL
+// Asegúrate de que estos archivos existan y tengan las rutas correctas
+const sslOptions = {
+  key: fs.readFileSync(path.join(__dirname, 'certificates', 'privkey.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'certificates', 'fullchain.pem'))
+};
+
+// Crear servidores HTTP y HTTPS
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(sslOptions, app);
+
+// Iniciar servidores
+httpServer.listen(HTTP_PORT, () => {
+  console.log(`Servidor HTTP corriendo en puerto ${HTTP_PORT}`);
+});
+
+httpsServer.listen(HTTPS_PORT, () => {
+  console.log(`Servidor HTTPS corriendo en puerto ${HTTPS_PORT}`);
 });

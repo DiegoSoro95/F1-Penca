@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from './authService';
 
-const API_URL = 'http://localhost:5000/api/bets';
+const API_URL = 'http://f1-penca.ddns.net:5000/api/bets';
 
 // Crear apuesta
 const createBet = async (betData) => {

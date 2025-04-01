@@ -143,7 +143,7 @@ function Dashboard() {
                           
                           <div className="flex-grow-1 d-flex justify-content-center align-items-center">
                             <img 
-                              src={`/imagenes/${race.country.toLowerCase().replace(/\s/g, '-')}-map.png`} 
+                              src={`${process.env.PUBLIC_URL}/imagenes/${race.country.toLowerCase().replace(/\s/g, '-')}-map.png`} 
                               alt={`Mapa de ${race.circuit}`} 
                               className="img-fluid"
                               style={{
