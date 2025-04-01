@@ -46,8 +46,8 @@ const HTTPS_PORT = process.env.HTTPS_PORT || 443;
 // Configuración de certificados SSL
 // Asegúrate de que estos archivos existan y tengan las rutas correctas
 const sslOptions = {
-  key: fs.readFileSync(path.join(__dirname, 'certificates', 'privkey.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'certificates', 'fullchain.pem'))
+  key: fs.readFileSync(path.join(__dirname, 'certificates', 'f1-penca.ddns.net-key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'certificates', 'f1-penca.ddns.net-chain.pem'))
 };
 
 // Crear servidores HTTP y HTTPS
