@@ -12,7 +12,7 @@ function RaceDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [animate, setAnimate] = useState(false);
-  const [activeTab, setActiveTab] = useState('race'); // 'race', 'sprint', 'qualify', 'sprint_qualify'
+  const [activeTab, setActiveTab] = useState('race');
 
   // Function to get circuit image URL
   const getCircuitImage = (circuitName) => {
@@ -45,7 +45,6 @@ function RaceDetails() {
 
     const normalizedName = translations[circuitName] || circuitName;
 
-    console.log(normalizedName);
     // Generate the image URL
     return `https://media.formula1.com/content/dam/fom-website/races/2025/${normalizedName}.png`;
   };
@@ -57,13 +56,29 @@ function RaceDetails() {
     const loadData = async () => {
       try {
         // Obtener detalles de la carrera
+        let fecha;
         const raceData = await raceService.getRaceById(raceId);
         setRace(raceData.data);
-        
+
         // Obtener resultados de la carrera si ya ocurrió
-        if (new Date(raceData.data.date) < new Date()) {
+        if (raceData?.data.sprint_qualifying !== null){
+          fecha = raceData.data.sprint_qualifying;
+        }
+        else{
+          fecha = raceData.data.qualifying;
+
+        }
+        if (new Date(fecha) < new Date()) {
           const resultsData = await raceService.fetchRaceResults(raceId);
           setResults(resultsData.data);
+
+          if (resultsData.data.races && resultsData.data.races.length > 0) {
+            setActiveTab('race');
+          } else if (resultsData.data.qualify_result && resultsData.data.qualify_result.length > 0) {
+            setActiveTab('qualify');
+          } else if (resultsData.data.sprint_race && resultsData.data.sprint_race.length > 0) {
+            setActiveTab('sprint');
+          }
         }
         
         // Obtener la apuesta del usuario para esta carrera
@@ -258,7 +273,7 @@ function RaceDetails() {
                 {/* Tabs para elegir entre los diferentes tipos de resultados */}
                 <ul className="nav nav-tabs custom-tabs mb-4">                  
                   {hasSprintResults && (
-                    <li className="nav-item">
+                    <li className="nav-item" key="sprint-tab">
                       <button 
                         className={`nav-link ${activeTab === 'sprint' ? 'active' : ''}`}
                         onClick={() => setActiveTab('sprint')}
@@ -270,7 +285,7 @@ function RaceDetails() {
                   )}
                   
                   {hasQualifyResults && (
-                    <li className="nav-item">
+                    <li className="nav-item" key="qualify-tab">
                       <button 
                         className={`nav-link ${activeTab === 'qualify' ? 'active' : ''}`}
                         onClick={() => setActiveTab('qualify')}
@@ -282,7 +297,7 @@ function RaceDetails() {
                   )}
                   
                   {results.races && results.races.length > 0 && (
-                    <li className="nav-item">
+                    <li className="nav-item" key="race-tab">
                       <button 
                         className={`nav-link ${activeTab === 'race' ? 'active' : ''}`}
                         onClick={() => setActiveTab('race')}
