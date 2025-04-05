@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/F1-Penca/static/css/main.2858d543.css",
-    "main.js": "/F1-Penca/static/js/main.9045ae96.js",
+    "main.js": "/F1-Penca/static/js/main.bf67a7d2.js",
     "static/js/453.49adf835.chunk.js": "/F1-Penca/static/js/453.49adf835.chunk.js",
     "static/media/bootstrap-icons.woff?": "/F1-Penca/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
     "static/media/bootstrap-icons.woff2?": "/F1-Penca/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
     "index.html": "/F1-Penca/index.html",
     "main.2858d543.css.map": "/F1-Penca/static/css/main.2858d543.css.map",
-    "main.9045ae96.js.map": "/F1-Penca/static/js/main.9045ae96.js.map",
+    "main.bf67a7d2.js.map": "/F1-Penca/static/js/main.bf67a7d2.js.map",
     "453.49adf835.chunk.js.map": "/F1-Penca/static/js/453.49adf835.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2858d543.css",
-    "static/js/main.9045ae96.js"
+    "static/js/main.bf67a7d2.js"
   ]
 }
