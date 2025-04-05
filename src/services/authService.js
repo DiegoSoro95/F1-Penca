@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://f1-penca.ddns.net:5000/api/auth';
-//const API_URL = 'http://f1-penca.ddns.net:5000/api/auth';
+const API_URL = 'https://f1-penca.ddns.net/api/auth';
+//const API_URL = 'https://f1-penca.ddns.net:5000/api/auth';
 
 // Registrar usuario
 const register = async (username, email, password) => {

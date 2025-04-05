@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from './authService';
 
-const API_URL = 'http://f1-penca.ddns.net:5000/api/races';
+const API_URL = 'https://f1-penca.ddns.net/api/races';
 
 // Obtener carreras próximas
 const getUpcomingRaces = async () => {

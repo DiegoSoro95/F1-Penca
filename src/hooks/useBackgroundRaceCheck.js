@@ -12,7 +12,7 @@ export function useBackgroundRaceCheck(isAuthenticated = true) {
     const workerCode = `
       async function checkRaceResults() {
         try {
-          const response = await fetch('http://f1-penca.ddns.net:5000/api/races/check_results', {
+          const response = await fetch('https://f1-penca.ddns.net/api/races/check_results', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

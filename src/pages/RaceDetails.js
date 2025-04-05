@@ -155,7 +155,7 @@ function RaceDetails() {
     );
   }
 
-  const raceDate = new Date(race.date);
+  const raceDate = new Date(race.qualifying);
   const isPastRace = raceDate < new Date();
   const isUpcoming = !isPastRace;
   
